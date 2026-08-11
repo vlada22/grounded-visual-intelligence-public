@@ -12,11 +12,13 @@ def main() -> None:
     required = [
         ROOT / 'README.md',
         ROOT / 'THIRD_PARTY.md',
+        ROOT / 'PUBLICATION_SOURCE.json',
         ROOT / 'web/index.html',
         ROOT / 'web/styles.css',
         ROOT / 'web/app.js',
         ROOT / 'web/data/evidence.json',
         ROOT / 'assets/article-01/sample.mp4',
+        ROOT / 'scripts/verify_published_results.py',
     ]
     for path in required:
         if not path.is_file():

@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "article": "01",
+  "sourceRepository": "vlada22/grounded-visual-intelligence",
+  "sourceCommit": "ed65d666718aa00dc733504be6c4f4d7cc3fef25",
+  "publicRepository": "vlada22/grounded-visual-intelligence-public",
+  "scope": "Published browser demo, source clip, and derived observations only",
+  "intentionalDifferences": [
+    "Repository hyperlinks point to the public companion repository",
+    "Public-only validation, provenance, and deterministic result verification are added outside the published article text"
+  ]
+}
