@@ -1,0 +1,53 @@
+name: Mirror original Article 01 demo
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/mirror-original-demo.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout public repository
+        uses: actions/checkout@v6
+
+      - name: Fetch original published demo
+        run: git clone --depth 1 https://github.com/vlada22/grounded-visual-intelligence.git /tmp/original
+
+      - name: Mirror explorer and published media
+        run: |
+          cp demo/data/results.json /tmp/article01-results.json
+          rm -rf demo
+          cp -R /tmp/original/web demo
+          mkdir -p demo/assets demo/data
+          cp /tmp/original/assets/article-01/sample.mp4 demo/assets/sample.mp4
+          cp /tmp/article01-results.json demo/data/results.json
+          python - <<'PY'
+          from pathlib import Path
+
+          old = "https://github.com/vlada22/grounded-visual-intelligence"
+          new = "https://github.com/vlada22/grounded-visual-intelligence-public"
+          for path in Path("demo").rglob("*"):
+              if path.is_file() and path.suffix.lower() in {".html", ".js", ".css", ".json", ".md", ".txt"}:
+                  text = path.read_text(encoding="utf-8", errors="strict")
+                  if old in text:
+                      path.write_text(text.replace(old, new), encoding="utf-8")
+          PY
+
+      - name: Commit mirrored demo
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add demo
+          if git diff --cached --quiet; then
+            echo "Demo already matches the original published explorer."
+            exit 0
+          fi
+          git commit -m "Restore original Article 01 demo"
+          git push
