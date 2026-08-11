@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "experiment": "Article 01 cup crossing",
+  "source": "Gemini-generated controlled video",
+  "sampling": {"fps": 4, "durationSeconds": 10, "frameCount": 40, "resolutionSeconds": 0.25},
+  "question": "When does the white cup move from zone A to zone B?",
+  "answer": {"lastObservedInASeconds": 3.75, "firstObservedInBSeconds": 4.0, "boundaryFrames": [15, 16], "zoneAObservedDurationSeconds": 4.0, "zoneBObservedDurationSeconds": 6.0},
+  "models": {
+    "Grounded SAM 2": {"observations": 40, "gaps": 0, "recordedExecutionSeconds": 37.30286839100006, "peakGpuAllocatedGib": 3.2829842567443848, "scoreSemantics": "Grounding DINO seed score"},
+    "SAM 3": {"observations": 40, "gaps": 0, "recordedExecutionSeconds": 19.567025602999934, "peakGpuAllocatedGib": 1.8098092079162598, "scoreSemantics": "text-prompted track score"}
+  },
+  "agreement": {"matchedFrames": 40, "meanMaskIou": 0.9694045679328122, "medianMaskIou": 0.9691642546816752, "minimumMaskIou": 0.9487074271645466, "maximumMaskIou": 0.9828980099502488, "minimumMaskIouFrame": 15, "meanBoundingBoxIou": 0.9648265852562117, "meanMaskCentroidDistancePixels": 0.4474528314261588, "maximumMaskCentroidDistancePixels": 1.0681000126623441},
+  "publicBoundary": "Aggregate reviewed evidence only; no checkpoints, tokens, notebook outputs, raw masks, or handoff archives."
+}
