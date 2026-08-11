@@ -1,10 +1,11 @@
-name: Deploy public evidence explorer
+name: Deploy evidence explorer
 
 on:
   push:
     branches: [main]
     paths:
-      - "demo/**"
+      - "web/**"
+      - "assets/article-01/sample.mp4"
       - "scripts/validate_public_bundle.py"
       - ".github/workflows/pages.yml"
   workflow_dispatch:
@@ -31,10 +32,16 @@ jobs:
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
 
-      - name: Upload original explorer mirror
+      - name: Assemble static site
+        run: |
+          mkdir -p _site/assets
+          cp -R web/. _site/
+          cp assets/article-01/sample.mp4 _site/assets/sample.mp4
+
+      - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v4
         with:
-          path: demo
+          path: _site
 
   deploy:
     environment:
